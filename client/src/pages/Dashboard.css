@@ -1,0 +1,163 @@
+/* Container */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9fafb;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Header */
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e6ed;
+    padding-bottom: 10px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: #2c3e50;
+    text-align: left;
+    margin: 0;
+    user-select: none;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  
+  .btn-logout {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    user-select: none;
+  }
+  
+  .btn-logout:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Main Grid */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-auto-rows: minmax(300px, auto);
+    gap: 24px;
+  }
+  
+  /* Cards */
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px 28px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    transition: box-shadow 0.3s ease;
+    border: 1px solid #dde3e8;
+  }
+  
+  .card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Card Headings */
+  .card h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #34495e;
+    user-select: none;
+  }
+  
+  /* Specific cards can have small tweaks */
+  .tasks-card {
+    /* no extra styling needed here */
+  }
+  
+  .rating-card {
+    justify-content: flex-start;
+  }
+  
+  .streak-info {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 14px;
+    user-select: none;
+  }
+  
+  .addtask-card {
+    padding-top: 16px;
+  }
+  
+  .consistency-card {
+    /* Make graph section fill available space nicely */
+    flex-grow: 1;
+  }
+  
+  /* Buttons */
+  .btn-danger {
+    margin-top: 18px;
+    padding: 12px;
+    background-color: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+  
+  .btn-danger:hover {
+    background-color: #992d22;
+  }
+  
+  /* Scrollbar styling for overflow in cards if needed */
+  .card::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .card::-webkit-scrollbar-track {
+    background: #f0f3f7;
+    border-radius: 12px;
+  }
+  
+  .card::-webkit-scrollbar-thumb {
+    background: #a0aabf;
+    border-radius: 12px;
+  }
+  
+  @media (max-width: 600px) {
+    .dashboard-container {
+      padding: 0 12px 20px;
+    }
+    .dashboard-header h1 {
+      font-size: 2rem;
+    }
+    .btn-logout {
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+    .card {
+      padding: 20px;
+    }
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+    }
+  }
+  
