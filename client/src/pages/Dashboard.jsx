@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import TaskList from '../components/TaskList';
-import RatingInput from '../components/RatingInput';
-import ConsistencyGrid from '../components/ConsistencyGrid';
-import AddTaskForm from '../components/AddTaskForm';
+import TaskList from '../pages/TaskList.jsx';
+import RatingInput from '../pages/RatingInput.jsx';
+import ConsistencyGrid from '../pages/ConsistencyGrid';
+import AddTaskForm from '../pages/AddTaskForm';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';  // Import the CSS here
 
