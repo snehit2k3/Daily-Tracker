@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TaskList from '../pages/TaskList.jsx';
+import TaskList from '../components/TaskList.jsx';
 import RatingInput from '../pages/RatingInput.jsx';
 import ConsistencyGrid from '../pages/ConsistencyGrid';
 import AddTaskForm from '../pages/AddTaskForm';
