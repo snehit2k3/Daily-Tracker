@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
 const dashboardRoutes = require('./routes/dashboard');
@@ -7,30 +8,32 @@ const ratingRoutes = require('./routes/rating');
 const userRoutes = require('./routes/user');
 
 const sequelize = require('./config/db');
-const verifyToken = require('./middleware/authenticateToken'); // your JWT middleware
+const verifyToken = require('./middleware/authenticateToken'); // JWT middleware
 
 dotenv.config();
 const app = express();
 
+// ✅ CORS Configuration (Frontend URL should match your deployed frontend)
+app.use(cors({
+  origin: 'https://daily-tracker.vercel.app',
+  credentials: true
+}));
+
+// 📦 Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// 🔐 Routes
 app.use('/api/auth', authRoutes);
-
-// Protect dashboard routes with verifyToken middleware
 app.use('/api/dashboard', verifyToken, dashboardRoutes);
-
-// Protect task routes
 app.use('/api/tasks', verifyToken, taskRoutes);
-
-// Protect rating routes
 app.use('/api/ratings', verifyToken, ratingRoutes);
-
-// Protect user routes
 app.use('/api/user', verifyToken, userRoutes);
 
+// ✅ Health check
 app.get('/health', (req, res) => res.send('API is running'));
 
+// 🚀 Port setup
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, async () => {
