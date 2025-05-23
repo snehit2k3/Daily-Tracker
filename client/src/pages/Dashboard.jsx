@@ -4,7 +4,9 @@ import RatingInput from '../pages/RatingInput.jsx';
 import ConsistencyGrid from '../pages/ConsistencyGrid';
 import AddTaskForm from '../pages/AddTaskForm';
 import { useNavigate } from 'react-router-dom';
-import './Dashboard.css';  // Import the CSS here
+import './Dashboard.css';
+
+const API_BASE = 'https://daily-tracker-api.onrender.com';
 
 export default function Dashboard() {
   const [userData, setUserData] = useState({});
@@ -25,7 +27,7 @@ export default function Dashboard() {
 
     const fetchUserData = async () => {
       try {
-        const res = await fetch('/api/user/data', {
+        const res = await fetch(`${API_BASE}/api/user/data`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error('Failed to fetch user data');
@@ -41,7 +43,7 @@ export default function Dashboard() {
 
     const fetchTasks = async () => {
       try {
-        const res = await fetch(`/api/tasks?date=${today}`, {
+        const res = await fetch(`${API_BASE}/api/tasks?date=${today}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error('Failed to fetch tasks');
@@ -55,7 +57,7 @@ export default function Dashboard() {
 
     const fetchRatings = async () => {
       try {
-        const res = await fetch(`/api/ratings?date=${today}`, {
+        const res = await fetch(`${API_BASE}/api/ratings?date=${today}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error('Failed to fetch ratings');
@@ -75,7 +77,7 @@ export default function Dashboard() {
 
   const handleRatingChange = async (newRating) => {
     try {
-      const res = await fetch('/api/ratings', {
+      const res = await fetch(`${API_BASE}/api/ratings`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -93,7 +95,7 @@ export default function Dashboard() {
 
   const handleAddTask = async (taskName) => {
     try {
-      const res = await fetch('/api/tasks', {
+      const res = await fetch(`${API_BASE}/api/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -113,7 +115,7 @@ export default function Dashboard() {
   const handleToggleComplete = async (taskToUpdate) => {
     const updatedStatus = !taskToUpdate.completed;
     try {
-      const res = await fetch(`/api/tasks/${taskToUpdate.id}`, {
+      const res = await fetch(`${API_BASE}/api/tasks/${taskToUpdate.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -149,7 +151,6 @@ export default function Dashboard() {
       </header>
 
       <main className="dashboard-grid">
-        {/* Scheduled Tasks */}
         <section className="card tasks-card">
           <h2>📋 Scheduled Tasks</h2>
           <TaskList tasks={tasks} onToggleComplete={handleToggleComplete} />
@@ -158,7 +159,6 @@ export default function Dashboard() {
           </button>
         </section>
 
-        {/* Progress & Rating */}
         <section className="card rating-card">
           <h2>📈 Progress & Rating</h2>
           <p className="streak-info">
@@ -167,13 +167,11 @@ export default function Dashboard() {
           <RatingInput rating={rating} onChange={handleRatingChange} />
         </section>
 
-        {/* Add New Task */}
         <section className="card addtask-card">
           <h2>➕ Add New Task</h2>
           <AddTaskForm onAddTask={handleAddTask} />
         </section>
 
-        {/* Daily Consistency Graph */}
         <section className="card consistency-card">
           <h2>📊 Daily Consistency Graph</h2>
           <ConsistencyGrid data={consistencyData} />

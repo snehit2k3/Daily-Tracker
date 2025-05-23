@@ -34,11 +34,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 🔐 Routes
-app.use('/api/auth', authRoutes);
 app.use('/api/dashboard', verifyToken, dashboardRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/tasks', verifyToken, taskRoutes);
 app.use('/api/ratings', verifyToken, ratingRoutes);
-app.use('/api/user', verifyToken, userRoutes);
+app.use('/api/auth', authRoutes); // for login
 
 // ✅ Health check
 app.get('/health', (req, res) => res.send('API is running'));
