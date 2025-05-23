@@ -13,9 +13,10 @@ const verifyToken = require('./middleware/authenticateToken'); // JWT middleware
 dotenv.config();
 const app = express();
 
-const allowedOrigins = ['https://daily-tracker-lime.vercel.app'];
-
-
+const allowedOrigins = [
+  'https://daily-tracker-ioyj9ztv0-snehit-s-projects.vercel.app',
+  'https://daily-tracker-lime.vercel.app' // add all Vercel frontend URLs you use
+];
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
