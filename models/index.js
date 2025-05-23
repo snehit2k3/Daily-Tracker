@@ -13,12 +13,12 @@ const sequelize = new Sequelize(
   }
 );
 
-// Import model classes
+// Import models
 const User = require('./User');
 const Task = require('./Task');
 const Rating = require('./Rating');
 
-// Initialize models (define schema here for User and Task only)
+// Initialize User model
 User.init({
   username: {
     type: DataTypes.STRING,
@@ -40,6 +40,7 @@ User.init({
   timestamps: true,
 });
 
+// Initialize Task model
 Task.init({
   title: {
     type: DataTypes.STRING,
@@ -52,6 +53,14 @@ Task.init({
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
+  date: {
+    type: DataTypes.DATEONLY,
+    allowNull: false,
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }
 }, {
   sequelize,
   modelName: 'Task',
@@ -59,15 +68,17 @@ Task.init({
   timestamps: true,
 });
 
-// ⛔️ DO NOT redefine Rating here — it's already defined in models/Rating.js
+// Ensure Rating is initialized in its own file (Rating.js)
+// It must have date + userId defined in that file!
 
-// Set up associations
+// Define associations
 User.hasMany(Task, { foreignKey: 'userId' });
 Task.belongsTo(User, { foreignKey: 'userId' });
 
 User.hasMany(Rating, { foreignKey: 'userId' });
 Rating.belongsTo(User, { foreignKey: 'userId' });
 
+// Export everything
 module.exports = {
   sequelize,
   User,
