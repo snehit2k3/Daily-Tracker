@@ -13,7 +13,6 @@ const verifyToken = require('./middleware/authenticateToken'); // JWT middleware
 dotenv.config();
 const app = express();
 
-// ✅ Updated CORS Configuration to allow multiple frontends
 const allowedOrigins = [
   'https://daily-tracker.vercel.app',
   'https://daily-tracker-git-main-snehit-s-projects.vercel.app'
@@ -24,7 +23,7 @@ app.use(cors({
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('CORS not allowed from this origin'));
+      callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true
